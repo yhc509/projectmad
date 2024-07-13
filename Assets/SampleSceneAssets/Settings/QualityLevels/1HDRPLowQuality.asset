@@ -24,7 +24,7 @@ MonoBehaviour:
       m_SchemaId:
         m_Id: With3Levels
     supportVolumetrics: 0
-    supportVolumetricClouds: 0
+    supportVolumetricClouds: 1
     supportLightLayers: 1
     supportWater: 0
     waterSimulationResolution: 128
@@ -51,6 +51,7 @@ MonoBehaviour:
     decalNormalBufferHP: 0
     msaaSampleCount: 1
     supportMotionVectors: 1
+    supportDataDrivenLensFlare: 1
     supportRuntimeAOVAPI: 0
     supportDitheringCrossFade: 1
     supportTerrainHole: 0
@@ -62,7 +63,7 @@ MonoBehaviour:
     supportRayTracing: 0
     supportedRayTracingMode: 3
     lightLoopSettings:
-      cookieAtlasSize: 512
+      cookieAtlasSize: 2048
       cookieFormat: 74
       cookieAtlasLastValidMip: 0
       cookieTexArraySize: 16
@@ -151,6 +152,8 @@ MonoBehaviour:
       forcedPercentage: 100
       lowResTransparencyMinimumThreshold: 0
       rayTracingHalfResThreshold: 50
+      lowResSSGIMinimumThreshold: 0
+      lowResVolumetricCloudsMinimumThreshold: 50
     lowresTransparentSettings:
       enabled: 1
       checkerboardDepthBuffer: 1
@@ -293,6 +296,8 @@ MonoBehaviour:
   diffusionProfileSettings: {fileID: 0}
   virtualTexturingSettings:
     streamingCpuCacheSizeInMegaBytes: 256
+    streamingMipPreloadTexturesPerFrame: 0
+    streamingPreloadMipCount: 1
     streamingGpuCacheSettings:
     - format: 0
       sizeInMegaBytes: 128
@@ -489,6 +494,6 @@ MonoBehaviour:
   m_ObsoleteShaderVariantLogLevel: 0
   m_ObsoleteLensAttenuation: 0
   m_ObsoleteDiffusionProfileSettingsList:
-  - {fileID: 11400000, guid: 26bdddf49760c61438938733f07fa2a2, type: 2}
-  - {fileID: 11400000, guid: 78322c7f82657514ebe48203160e3f39, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 11400000, guid: 2b7005ba3a4d8474b8cdc34141ad766e, type: 2}
