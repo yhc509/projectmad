@@ -13,7 +13,7 @@ public class dUIManager : MonoBehaviour
 
     public void Start()
     {
-        _messageCanvasGroup.gameObject.SetActive(false);
+        // _messageCanvasGroup.gameObject.SetActive(false);
     }
     public void ShowMessage(string message, float delay)
     {

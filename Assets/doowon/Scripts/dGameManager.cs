@@ -29,7 +29,7 @@ public class dGameManager : MonoBehaviour
     {
         currentCount = 0;
         UpdateEnvironment(currentCount);
-        ShowMessage($"Collect {winCount} statues");
+        ShowMessage($"Collect {winCount} statues", 10f);
     }
 
     [ContextMenu("Update Statues")]
