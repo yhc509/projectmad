@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,21 +13,38 @@ public class PlayerController : MonoBehaviour
     float xRotation = 0f;
     float yRotation = 0f;
     bool isGrounded = false;
+    public bool stunned = false;
+    public Transform enemy;
+    public AudioClip[] stepAudioClip;
+    private AudioSource audioSource;
+    [SerializeField] private bool isOnGrass = false;
+
+    public float interactDistance = 1f;
 
     void Start()
     {
         // Lock cursor to center of screen and hide it
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
     {
+        if (stunned)
+        {
+            return;
+        }
         Move();
     }
 
     void Update()
     {
+        if (stunned)
+        {
+            audioSource.Stop();
+            return;
+        }
         CameraUpdate();
        
         // Unlock cursor when pressing Escape
@@ -65,6 +83,42 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = transform.right * horizontal + transform.forward * vertical;
         rb.MovePosition(rb.position + moveDirection * movementSpeed * Time.deltaTime);
 
+        PlayFootStepSound(moveDirection);
+    }
+
+    public void PlayFootStepSound(Vector3 moveDirection)
+    {
+        if (isGrounded == false)
+        {
+            audioSource.Stop();
+            return;
+        }
+        var hit = Physics.RaycastAll(transform.position, Vector3.down, 1.1f);
+        bool onGrass = false;
+        foreach (var h in hit)
+        {
+            if (h.collider.name == "Plane")
+            {
+                onGrass = true;
+                break;
+            }
+        }
+        if(isOnGrass != onGrass)
+        {
+            audioSource.clip = stepAudioClip[onGrass ? 0 : 1];
+            isOnGrass = onGrass;
+            audioSource.Stop();
+        }
+
+        if (moveDirection.magnitude < 0.5f)
+        {
+            audioSource.Stop();
+
+        }
+        else if (audioSource.isPlaying == false)
+        {
+            audioSource.Play();
+        }
     }
 
     void CameraUpdate()
@@ -83,7 +137,32 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        // Placeholder for shooting logic
-        Debug.Log("Bang!"); // Replace with actual shooting logic
+        var hit = Physics.RaycastAll(cam.transform.position, cam.transform.forward, interactDistance);
+        foreach (var h in hit)
+        {
+            if(h.collider.tag == "Respawn")
+            {
+                dGameManager.instance.CollectStatue(h.collider.gameObject);
+            }
+            else if(h.collider.tag == "Finish")
+            {
+                dGameManager.instance.Finish();
+            }
+        }
+    }
+
+    public void LookAt(Vector3 position)
+    {
+        cam.transform.LookAt(position);
+        xRotation = cam.transform.rotation.eulerAngles.x;
+        xRotation = Mathf.Repeat(xRotation + 90, 180f) - 90f;
+        yRotation = cam.transform.rotation.eulerAngles.y;
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        transform.localRotation = Quaternion.Euler(0f, yRotation, 0f);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(cam.transform.position, cam.transform.forward * interactDistance);
     }
 }
