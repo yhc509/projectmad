@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -14,6 +15,7 @@ public class dGameManager : MonoBehaviour
 
     public int winCount = 5;
     [SerializeField] private int currentCount = 0;
+    public int createStatueCount = 10;
 
     public dUIManager uIManager;
 
@@ -29,6 +31,7 @@ public class dGameManager : MonoBehaviour
     {
         currentCount = 0;
         UpdateEnvironment(currentCount);
+        CreateRandomStatues();
         ShowMessage($"Collect {winCount} statues", 10f);
     }
 
@@ -44,6 +47,9 @@ public class dGameManager : MonoBehaviour
                 statues[i] = statueGroup.GetChild(i).gameObject;
             }
         }
+#if UNITY_EDITOR
+        EditorUtility.SetDirty(this);
+#endif
     }
 
     private bool CheckStatue(GameObject statue, out int index)
@@ -159,5 +165,26 @@ public class dGameManager : MonoBehaviour
         }
         volume.weight = targetWeight;
         vtCoroutine = null;
+    }
+
+    void CreateRandomStatues()
+    {
+        createStatueCount = Mathf.Clamp(createStatueCount, winCount, statues.Length - 1);
+        ShuffleArray(statues);
+        for(int i = createStatueCount; i < statues.Length; i++)
+        {
+            statues[i].gameObject.SetActive(false);
+        }
+    }
+
+    void ShuffleArray(GameObject[] array)
+    {
+        for (int i = array.Length - 1; i > 0; i--)
+        {
+            int rnd = Random.Range(0, i + 1);
+            GameObject temp = array[i];
+            array[i] = array[rnd];
+            array[rnd] = temp;
+        }
     }
 }

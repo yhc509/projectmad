@@ -113,6 +113,8 @@ public class EnemyController : MonoBehaviour
 
     IEnumerator AttackCoroutine(float screamTime)
     {
+        agent.updateRotation = false;
+        agent.transform.LookAt(target.transform.position);
         var player = target.GetComponent<PlayerController>();
         player.stunned = true;
         animator.SetBool("Attack", true);
@@ -125,6 +127,7 @@ public class EnemyController : MonoBehaviour
         }
         player.stunned = false;
         animator.SetBool("Attack", false);
+        agent.updateRotation = true;
         Warp(player.transform.position + player.transform.forward * -20);
         attackCoroutine = null;
     }
@@ -140,6 +143,7 @@ public class EnemyController : MonoBehaviour
 
     public void Warp(Vector3 position)
     {
+        position = new Vector3(position.x, Mathf.Max(5, position.y), position.z);
         if (NavMesh.SamplePosition(position, out var hit, 5.0f, NavMesh.AllAreas))
         {
             agent.Warp(hit.position);
