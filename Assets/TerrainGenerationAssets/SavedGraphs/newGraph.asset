@@ -1,0 +1,216 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcdd2d7c869dc945acb4fc649f03c26, type: 3}
+  m_Name: newGraph
+  m_EditorClassIdentifier: 
+  savedNodes:
+  - nodeType: 10
+    position: {x: 1001, y: 148}
+    octaves: 0
+    frequency: 0
+    amplitude: 0.4
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes: []
+  - nodeType: 4
+    position: {x: 41, y: 114}
+    octaves: 4
+    frequency: 4400
+    amplitude: 0.5
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes:
+    - position: {x: 287, y: -6}
+      nodeType: 2
+    - position: {x: 323, y: 321}
+      nodeType: 3
+  - nodeType: 2
+    position: {x: 287, y: -6}
+    octaves: 0
+    frequency: 0
+    amplitude: 0
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes: []
+  - nodeType: 5
+    position: {x: 44, y: 338}
+    octaves: 8
+    frequency: 3000
+    amplitude: 0.2
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes:
+    - position: {x: 278, y: 517}
+      nodeType: 2
+    - position: {x: 323, y: 321}
+      nodeType: 3
+  - nodeType: 2
+    position: {x: 278, y: 517}
+    octaves: 0
+    frequency: 0
+    amplitude: 0
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes: []
+  - nodeType: 3
+    position: {x: 323, y: 321}
+    octaves: 0
+    frequency: 0
+    amplitude: 0
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes:
+    - position: {x: 540, y: 501}
+      nodeType: 2
+    - position: {x: 770, y: 277}
+      nodeType: 6
+  - nodeType: 2
+    position: {x: 540, y: 501}
+    octaves: 0
+    frequency: 0
+    amplitude: 0
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes: []
+  - nodeType: 1
+    position: {x: 531, y: 245}
+    octaves: 0
+    frequency: 0
+    amplitude: 0
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.865312
+        value: 0.30846503
+        inSlope: 1.0806239
+        outSlope: 1.0806239
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes:
+    - position: {x: 764, y: 21}
+      nodeType: 2
+    - position: {x: 770, y: 277}
+      nodeType: 6
+  - nodeType: 2
+    position: {x: 764, y: 21}
+    octaves: 0
+    frequency: 0
+    amplitude: 0
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes: []
+  - nodeType: 6
+    position: {x: 770, y: 277}
+    octaves: 0
+    frequency: 0
+    amplitude: 0
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes:
+    - position: {x: 999, y: 456}
+      nodeType: 2
+    - position: {x: 1001, y: 148}
+      nodeType: 10
+  - nodeType: 2
+    position: {x: 999, y: 456}
+    octaves: 0
+    frequency: 0
+    amplitude: 0
+    constant: 0
+    animationCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    customScriptName: 
+    outPointNodes: []

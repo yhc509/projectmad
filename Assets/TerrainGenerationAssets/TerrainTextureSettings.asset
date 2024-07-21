@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: febf0a24e9732764284fb4c3ec04e139, type: 3}
+  m_Name: TerrainTextureSettings
+  m_EditorClassIdentifier: 
+  MaxTerrainHeight: 0
+  SnowHeight: 400
+  WaterMaterial: {fileID: 2100000, guid: fc150c317bdc62a46a2358b49901cb67, type: 2}
+  Layers:
+  - Texture: {fileID: 2800000, guid: 74c93d92af1ef4e40ad94bcabaccebcf, type: 3}
+    NormalMap: {fileID: 0}
+    StartHeight: 0
+    Overlap: 2
+    TextureScale: 30
+  - Texture: {fileID: 2800000, guid: 2b9bcd0ba1c5e08458739cace7bb9b3a, type: 3}
+    NormalMap: {fileID: 2800000, guid: 048f8ea830c73e94fab7d2c730256e65, type: 3}
+    StartHeight: 0.0001
+    Overlap: 25
+    TextureScale: 1
+  - Texture: {fileID: 2800000, guid: 0a2db311220812048b2ef56b511e0f52, type: 3}
+    NormalMap: {fileID: 2800000, guid: 098fe704236e87f479449e0f0d83631d, type: 3}
+    StartHeight: 0.15
+    Overlap: 35
+    TextureScale: 5
+  - Texture: {fileID: 2800000, guid: 2181e28c9a342d344adaea63a91780c9, type: 3}
+    NormalMap: {fileID: 2800000, guid: 11bcdb3d8666ada43bb8f2bb8a9cb866, type: 3}
+    StartHeight: 0.2
+    Overlap: 35
+    TextureScale: 300
+  - Texture: {fileID: 2800000, guid: 60fca8a1907c504409344c6b0f67d995, type: 3}
+    NormalMap: {fileID: 0}
+    StartHeight: 0.6
+    Overlap: 35
+    TextureScale: 300
+  - Texture: {fileID: 2800000, guid: 088d1553cd3a5fc4ea7bb0a13cfa0584, type: 3}
+    NormalMap: {fileID: 2800000, guid: 60b69e024091c56499fc2811e0bddccc, type: 3}
+    StartHeight: 0.617
+    Overlap: 20
+    TextureScale: 200
