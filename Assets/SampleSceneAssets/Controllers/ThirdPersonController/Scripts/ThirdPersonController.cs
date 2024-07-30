@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -83,6 +84,19 @@ namespace StarterAssets
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
 
+        private bool _tryLedgeGrab = false;
+        private bool _onLedgeGrab = false;
+
+        public GameObject _rayHitMark; 
+        public Transform _HeadRayHeight;
+        Vector3 _ledgeMarker;
+        Vector3 _rayStart;
+        Vector3 _rayLedgePositiont;
+        public Vector3 _playerOffset =new Vector3(0.0f, -1.72f, 0.3f);
+        public LayerMask _ledgeDetectionMask;
+        RaycastHit _rayHitWall;
+        RaycastHit _rayFindLedge;
+
         // timeout deltatime
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
@@ -93,6 +107,7 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDLedgeGrab;
 
         private PlayerInput _playerInput;
         private Animator _animator;
@@ -125,7 +140,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -142,6 +157,12 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
+            // jump가 된 상태에서 space가 눌리면 렛지그랩 시도하는것
+            _tryLedgeGrab = 
+                Input.GetKeyDown(KeyCode.Space) && 
+                _animator.GetBool(_animIDJump) && 
+                Grounded == false;
+
             JumpAndGravity();
             GroundedCheck();
             Move();
@@ -154,11 +175,12 @@ namespace StarterAssets
 
         private void AssignAnimationIDs()
         {
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDSpeed        = Animator.StringToHash("Speed");
+            _animIDGrounded     = Animator.StringToHash("Grounded");
+            _animIDJump         = Animator.StringToHash("Jump");
+            _animIDFreeFall     = Animator.StringToHash("FreeFall");
+            _animIDMotionSpeed  = Animator.StringToHash("MotionSpeed");
+            _animIDLedgeGrab    = Animator.StringToHash("LedgeGrab");
         }
 
         private void GroundedCheck()
@@ -174,6 +196,82 @@ namespace StarterAssets
             {
                 _animator.SetBool(_animIDGrounded, Grounded);
             }
+        }
+
+        void SetRotationToLedgeGrabTarget()
+        {
+            if (_onLedgeGrab)
+            {
+
+            }
+        }
+
+        void LedgeRayCast()
+        {
+            if (Physics.Raycast(_HeadRayHeight.position, transform.forward, out _rayHitWall, 1f, _ledgeDetectionMask))
+            {
+                _rayStart = _rayHitWall.point + transform.forward * 0.03f;
+                _rayStart.y += 3.0f;
+
+                if (_tryLedgeGrab)
+                {
+                    _onLedgeGrab = true;
+                }
+
+                if (Physics.Raycast(_rayStart, Vector3.down, out _rayFindLedge, 5.0f))
+                {
+                    _ledgeMarker = new Vector3(_rayHitWall.transform.position.x, _rayFindLedge.transform.position.y, _rayHitWall.transform.position.z);
+
+                    GameObject tempMark;
+                    tempMark = Instantiate(_rayHitMark, _rayFindLedge.point, Quaternion.LookRotation(_rayFindLedge.normal)) as GameObject;
+                    _rayLedgePositiont = tempMark.transform.position;
+                    Destroy(tempMark, 0.03f);
+                }
+            }
+        }
+
+        void OnBeginLerpToLedgeGrabClimb()
+        {
+            _onLedgeGrab = true;
+
+            // ground values
+            MoveSpeed = 0.0f;
+            SprintSpeed = 0.0f;
+            Gravity = 0.0f;
+            _rotationVelocity = 0.0f;
+            _verticalVelocity = 0.0f;
+
+            Vector3 hitPosition = _rayLedgePositiont;//_rayFindLedge.point;
+            hitPosition.y += 1.0f;
+            transform.position = Vector3.Lerp(transform.position, hitPosition, 1);
+            transform.position = transform.TransformPoint(_playerOffset);
+        }
+
+        //IEnumerator OnLerpLedgeGrabClimb()
+        //{
+
+
+
+        //}
+
+        void OnEndLerpToLedgeGrabClimb()
+        {
+            _animator.SetBool(_animIDLedgeGrab, false);
+            _onLedgeGrab = false;
+            
+            MoveSpeed = 2.0f;
+            SprintSpeed = 5.335f;
+            Gravity = -15.0f;
+
+        }
+
+        private void OnDrawGizmos()
+        {
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Debug.DrawRay(_HeadRayHeight.position, forward, Color.green);
+            //Vector3 down = transform.TransformDirection(Vector3.down);
+            //Debug.DrawRay(_rayStart, down, Color.green);
+
         }
 
         private void CameraRotation()
@@ -199,6 +297,9 @@ namespace StarterAssets
 
         private void Move()
         {
+            if (_onLedgeGrab)              
+                return;
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -306,6 +407,8 @@ namespace StarterAssets
             }
             else
             {
+                LedgeRayCast();
+
                 // reset the jump timeout timer
                 _jumpTimeoutDelta = JumpTimeout;
 
@@ -325,6 +428,16 @@ namespace StarterAssets
 
                 // if we are not grounded, do not jump
                 _input.jump = false;
+
+                // 렛지그랩하는 도중에는 멈춰있어야함
+                if (_onLedgeGrab)
+                {
+                    _speed = 0.0f;
+                    _rotationVelocity = 0.0f;
+                    _verticalVelocity = 0.0f;
+                    Gravity = 0.0f;
+                    _animator.SetBool(_animIDLedgeGrab, true);
+                }
             }
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
@@ -332,6 +445,11 @@ namespace StarterAssets
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
+        }
+
+        void OffLedgeGrab()
+        {
+
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
