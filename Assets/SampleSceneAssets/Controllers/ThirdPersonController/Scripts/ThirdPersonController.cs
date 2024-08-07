@@ -242,17 +242,12 @@ namespace StarterAssets
             _verticalVelocity = 0.0f;
 
             Vector3 hitPosition = _rayLedgePositiont;//_rayFindLedge.point;
-            hitPosition.y += 1.0f;
             transform.position = Vector3.Lerp(transform.position, hitPosition, 1);
             transform.position = transform.TransformPoint(_playerOffset);
+
+
+             //_controller.enabled = false;
         }
-
-        //IEnumerator OnLerpLedgeGrabClimb()
-        //{
-
-
-
-        //}
 
         void OnEndLerpToLedgeGrabClimb()
         {
@@ -263,6 +258,8 @@ namespace StarterAssets
             SprintSpeed = 5.335f;
             Gravity = -15.0f;
 
+            //_controller.transform.position = transform.position;
+            //_controller.enabled = true;
         }
 
         private void OnDrawGizmos()
