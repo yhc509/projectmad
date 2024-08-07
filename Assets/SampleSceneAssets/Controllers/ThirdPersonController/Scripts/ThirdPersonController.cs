@@ -257,9 +257,7 @@ namespace StarterAssets
             MoveSpeed = 2.0f;
             SprintSpeed = 5.335f;
             Gravity = -15.0f;
-
-            //_controller.transform.position = transform.position;
-            //_controller.enabled = true;
+            transform.position = _rayLedgePositiont;
         }
 
         private void OnDrawGizmos()
