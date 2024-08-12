@@ -12635,10 +12635,22 @@ PrefabInstance:
     - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: _HeadRayHeight
       value: 
-      objectReference: {fileID: 2122868616}
+      objectReference: {fileID: 1547815086}
     - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: _playerOffset.y
-      value: -1.98
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+      propertyPath: _playerOffset.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+      propertyPath: _playerRotOffset.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+      propertyPath: _playerRotOffset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: _ledgeDetectionMask.m_Bits
@@ -18257,7 +18269,7 @@ Transform:
   m_GameObject: {fileID: 1359408300}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -3.14, y: 5.678, z: -1.391}
+  m_LocalPosition: {x: -3.14, y: 5.23, z: -1.391}
   m_LocalScale: {x: 1.5000001, y: 1.5, z: 1.5000001}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20615,6 +20627,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1547815086 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 990834681811677591, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+  m_PrefabInstance: {fileID: 961322802}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1548479672
 GameObject:
   m_ObjectHideFlags: 3
@@ -32343,11 +32360,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2122868616 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 794329200856815206, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
-  m_PrefabInstance: {fileID: 961322802}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2124969127
 GameObject:
   m_ObjectHideFlags: 0

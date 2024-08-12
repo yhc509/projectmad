@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -92,7 +93,8 @@ namespace StarterAssets
         Vector3 _ledgeMarker;
         Vector3 _rayStart;
         Vector3 _rayLedgePositiont;
-        public Vector3 _playerOffset =new Vector3(0.0f, -1.72f, 0.3f);
+        public Vector3 _playerOffset =new Vector3(0.0f, -2.4f, 0.0f);
+        public Quaternion _playerRotOffset = Quaternion.identity;
         public LayerMask _ledgeDetectionMask;
         RaycastHit _rayHitWall;
         RaycastHit _rayFindLedge;
@@ -114,6 +116,7 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
+        private CinemachineVirtualCamera _playerVirtualCamera;
 
         private const float _threshold = 0.01f;
 
@@ -135,11 +138,16 @@ namespace StarterAssets
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+
+            _playerVirtualCamera = GameObject.Find("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>();
+
         }
 
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
+
+            
 
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
@@ -241,12 +249,12 @@ namespace StarterAssets
             _rotationVelocity = 0.0f;
             _verticalVelocity = 0.0f;
 
+            float backwardOffset = 0.4f;
+
             Vector3 hitPosition = _rayLedgePositiont;//_rayFindLedge.point;
-            transform.position = Vector3.Lerp(transform.position, hitPosition, 1);
-            transform.position = transform.TransformPoint(_playerOffset);
+            transform.position = hitPosition + _playerOffset - transform.forward*backwardOffset;
+            transform.SetPositionAndRotation(transform.position, transform.rotation * _playerRotOffset);
 
-
-             //_controller.enabled = false;
         }
 
         void OnEndLerpToLedgeGrabClimb()
@@ -257,7 +265,8 @@ namespace StarterAssets
             MoveSpeed = 2.0f;
             SprintSpeed = 5.335f;
             Gravity = -15.0f;
-            transform.position = _rayLedgePositiont;
+            Vector3 upOffset = new Vector3(0.0f, 0.05f, 0.0f);
+            transform.position = _rayLedgePositiont + upOffset;
         }
 
         private void OnDrawGizmos()
