@@ -89,10 +89,10 @@ namespace StarterAssets
         private bool _onLedgeGrab = false;
 
         public GameObject _rayHitMark; 
-        public Transform _HeadRayHeight;
+        public Transform _rayStartTransform;
         Vector3 _ledgeMarker;
         Vector3 _rayStart;
-        Vector3 _rayLedgePositiont;
+        Vector3 _rayLedgePosition;
         public Vector3 _playerOffset =new Vector3(0.0f, -2.4f, 0.0f);
         public Quaternion _playerRotOffset = Quaternion.identity;
         public LayerMask _ledgeDetectionMask;
@@ -146,9 +146,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-
             
-
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -216,24 +214,26 @@ namespace StarterAssets
 
         void LedgeRayCast()
         {
-            if (Physics.Raycast(_HeadRayHeight.position, transform.forward, out _rayHitWall, 1f, _ledgeDetectionMask))
+            if (Physics.Raycast(_rayStartTransform.position, transform.forward, out _rayHitWall, 1f, _ledgeDetectionMask))
             {
                 _rayStart = _rayHitWall.point + transform.forward * 0.03f;
                 _rayStart.y += 3.0f;
 
-                if (_tryLedgeGrab)
-                {
-                    _onLedgeGrab = true;
-                }
 
-                if (Physics.Raycast(_rayStart, Vector3.down, out _rayFindLedge, 5.0f))
+                if (Physics.Raycast(_rayStart, Vector3.down, out _rayFindLedge, 3.0f))
                 {
                     _ledgeMarker = new Vector3(_rayHitWall.transform.position.x, _rayFindLedge.transform.position.y, _rayHitWall.transform.position.z);
 
                     GameObject tempMark;
                     tempMark = Instantiate(_rayHitMark, _rayFindLedge.point, Quaternion.LookRotation(_rayFindLedge.normal)) as GameObject;
-                    _rayLedgePositiont = tempMark.transform.position;
+                    _rayLedgePosition = tempMark.transform.position;
                     Destroy(tempMark, 0.03f);
+                }
+
+                if (_tryLedgeGrab)
+                {
+                    if (Vector3.Distance(_rayLedgePosition, _rayStartTransform.position) < 3.0f)
+                        _onLedgeGrab = true;
                 }
             }
         }
@@ -251,7 +251,7 @@ namespace StarterAssets
 
             float backwardOffset = 0.4f;
 
-            Vector3 hitPosition = _rayLedgePositiont;//_rayFindLedge.point;
+            Vector3 hitPosition = _rayLedgePosition;//_rayFindLedge.point;
             transform.position = hitPosition + _playerOffset - transform.forward*backwardOffset;
             transform.SetPositionAndRotation(transform.position, transform.rotation * _playerRotOffset);
 
@@ -266,13 +266,13 @@ namespace StarterAssets
             SprintSpeed = 5.335f;
             Gravity = -15.0f;
             Vector3 upOffset = new Vector3(0.0f, 0.05f, 0.0f);
-            transform.position = _rayLedgePositiont + upOffset;
+            transform.position = _rayLedgePosition + upOffset;
         }
 
         private void OnDrawGizmos()
         {
             Vector3 forward = transform.TransformDirection(Vector3.forward);
-            Debug.DrawRay(_HeadRayHeight.position, forward, Color.green);
+            Debug.DrawRay(_rayStartTransform.position, forward, Color.green);
             //Vector3 down = transform.TransformDirection(Vector3.down);
             //Debug.DrawRay(_rayStart, down, Color.green);
 

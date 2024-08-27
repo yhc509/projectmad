@@ -12629,6 +12629,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+      propertyPath: _rayHeight
+      value: 
+      objectReference: {fileID: 1547815086}
+    - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: _rayHitMark
       value: 
       objectReference: {fileID: 8493768531887663845, guid: 351e13ba5bb2cde418fb1f27700f5299, type: 3}
@@ -12652,6 +12656,10 @@ PrefabInstance:
       propertyPath: _playerRotOffset.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
+      propertyPath: _rayStartTransform
+      value: 
+      objectReference: {fileID: 1547815086}
     - target: {fileID: 7326017790866764361, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: _ledgeDetectionMask.m_Bits
       value: 1
