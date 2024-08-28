@@ -232,7 +232,7 @@ namespace StarterAssets
 
                 if (_tryLedgeGrab)
                 {
-                    if (Vector3.Distance(_rayLedgePosition, _rayStartTransform.position) < 3.0f)
+                    if (Vector3.Distance(_rayLedgePosition, _rayStartTransform.position) < 1.5f)
                         _onLedgeGrab = true;
                 }
             }
