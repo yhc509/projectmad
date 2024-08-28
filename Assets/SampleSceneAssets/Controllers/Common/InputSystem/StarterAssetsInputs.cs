@@ -18,6 +18,9 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		[Header("Game System Input")]
+		public bool slow;
+		
 		public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
@@ -41,6 +44,10 @@ namespace StarterAssets
 			SprintInput(value.isPressed);
 		}
 
+		public void OnSlow(InputValue value)
+		{
+			SlowInput(value.isPressed);
+		}
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
@@ -62,6 +69,11 @@ namespace StarterAssets
 			sprint = newSprintState;
 		}
 
+		public void SlowInput(bool newSprintState)
+		{
+			slow = newSprintState;
+		}
+		
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
