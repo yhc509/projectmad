@@ -12478,7 +12478,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2650234582257683266, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: field of view
-      value: 50.0181
+      value: 63.763226
       objectReference: {fileID: 0}
     - target: {fileID: 2650234582257683266, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: m_FOVAxisMode
@@ -12486,7 +12486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2650234582257683266, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: m_FocalLength
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2650234582257683266, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: m_GateFitMode
@@ -12530,7 +12530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2650234582257683269, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.6000006
+      value: -3.5000005
       objectReference: {fileID: 0}
     - target: {fileID: 2650234582257683269, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12570,7 +12570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4925331831405600874, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.6000006
+      value: -3.5000005
       objectReference: {fileID: 0}
     - target: {fileID: 4925331831405600875, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: m_Enabled
@@ -12582,7 +12582,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4925331831405600875, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 50.0181
+      value: 63.763226
       objectReference: {fileID: 0}
     - target: {fileID: 4925331831405600875, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: m_Lens.ModeOverride
@@ -12606,7 +12606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4925331831984902570, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: CameraDistance
-      value: 1.6
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 4925331831984902570, guid: c708a3b79cd542b42bbfedb17e213bc1, type: 3}
       propertyPath: ShoulderOffset.y
