@@ -84,6 +84,8 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
+        
+        private float _verticalVelocityForce; // ì™¸ë¶€ ê¸°ë¯¹ì— ì˜í•œ ìˆ˜ì§ì†ë„
 
         private bool _tryLedgeGrab = false;
         private bool _onLedgeGrab = false;
@@ -163,7 +165,7 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            // jump°¡ µÈ »óÅÂ¿¡¼­ space°¡ ´­¸®¸é ·¿Áö±×·¦ ½ÃµµÇÏ´Â°Í
+            // jumpï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ spaceï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½×·ï¿½ ï¿½Ãµï¿½ï¿½Ï´Â°ï¿½
             _tryLedgeGrab = 
                 Input.GetKeyDown(KeyCode.Space) && 
                 _animator.GetBool(_animIDJump) && 
@@ -214,6 +216,8 @@ namespace StarterAssets
 
         void LedgeRayCast()
         {
+            if (_rayStartTransform == null) return;
+            
             if (Physics.Raycast(_rayStartTransform.position, transform.forward, out _rayHitWall, 1f, _ledgeDetectionMask))
             {
                 _rayStart = _rayHitWall.point + transform.forward * 0.03f;
@@ -271,6 +275,8 @@ namespace StarterAssets
 
         private void OnDrawGizmos()
         {
+            if (_rayStartTransform == null) return;
+            
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Debug.DrawRay(_rayStartTransform.position, forward, Color.green);
             //Vector3 down = transform.TransformDirection(Vector3.down);
@@ -372,6 +378,13 @@ namespace StarterAssets
 
         private void JumpAndGravity()
         {
+            if (_verticalVelocityForce > 0f)
+            {
+                _verticalVelocity = _verticalVelocityForce;
+                Grounded = false;
+                _verticalVelocityForce = 0f;
+            }
+            
             if (Grounded)
             {
                 // reset the fall timeout timer
@@ -391,7 +404,7 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if ((_input.jump && _jumpTimeoutDelta <= 0.0f))
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
@@ -433,7 +446,7 @@ namespace StarterAssets
                 // if we are not grounded, do not jump
                 _input.jump = false;
 
-                // ·¿Áö±×·¦ÇÏ´Â µµÁß¿¡´Â ¸ØÃçÀÖ¾î¾ßÇÔ
+                // ï¿½ï¿½ï¿½ï¿½ï¿½×·ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½
                 if (_onLedgeGrab)
                 {
                     _speed = 0.0f;
@@ -495,6 +508,11 @@ namespace StarterAssets
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
+        }
+
+        public void SetVerticalVelocity(float addValue)
+        {
+            _verticalVelocityForce += addValue;
         }
     }
 }

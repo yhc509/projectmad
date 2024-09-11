@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a6d52fcc3deae4da6876d832e69119, type: 3}
+  m_Name: VegetationSettings
+  m_EditorClassIdentifier: 
+  TreePlacingCoeffitient: 0.6
+  Layers:
+  - PlacementTexture: {fileID: 2800000, guid: e9866699a4ddce642b7da4aeaa74d279, type: 3}
+    TreeCount: 45
+    TreePrefab: []
+    DetailCount: 90
+    DetailPrefabs:
+    - {fileID: 100000, guid: 3da8c6e2c0ecd1d4492b3612b97222db, type: 3}
+    BushCount: 0
+    BushPrefabs: []
+  - PlacementTexture: {fileID: 2800000, guid: e9866699a4ddce642b7da4aeaa74d279, type: 3}
+    TreeCount: 90
+    TreePrefab:
+    - {fileID: 919132149155446097, guid: bedb984d4ae01af4a9f264c1f2129d10, type: 3}
+    DetailCount: 3150
+    DetailPrefabs:
+    - {fileID: 100000, guid: 79bce83937e43d042843a359e671ca99, type: 3}
+    - {fileID: 100000, guid: e2abe2db222fa9c49a111c088001ebcf, type: 3}
+    BushCount: 0
+    BushPrefabs: []
+  - PlacementTexture: {fileID: 2800000, guid: e939889a01ba73f4c9f41bb8d6d79d5f, type: 3}
+    TreeCount: 450
+    TreePrefab:
+    - {fileID: 114418, guid: be878d9ea17907f4a8068678a5ce7908, type: 3}
+    - {fileID: 114418, guid: 9b8fc966f95ea9c4194dc091fc40b478, type: 3}
+    - {fileID: 114418, guid: 956bd2acf7aae244dac8fc20cf57858d, type: 3}
+    - {fileID: 114418, guid: 8b2d47fdc2e25ac4f9721480a68bbefa, type: 3}
+    DetailCount: 180
+    DetailPrefabs:
+    - {fileID: 100000, guid: 3da8c6e2c0ecd1d4492b3612b97222db, type: 3}
+    - {fileID: 100000, guid: e349b6a927183154d9bf449b09b8e413, type: 3}
+    BushCount: 900
+    BushPrefabs:
+    - {fileID: 1253365200111527898, guid: 8109e9e16ba4cc04b8e0928aea897927, type: 3}
+    - {fileID: 7992715529498131577, guid: 0cc0db2b14252644da9f1f74ed0c8f90, type: 3}
+    - {fileID: 4119340359363394084, guid: 431e05c5e2b18ba4fa6b3b0a6f687786, type: 3}
+  - PlacementTexture: {fileID: 2800000, guid: 3787ecf31b318914f908bb48537ebf10, type: 3}
+    TreeCount: 135
+    TreePrefab:
+    - {fileID: 1743353957770956, guid: 539fa9bc6500e44708e0f7b2c78cbefe, type: 3}
+    - {fileID: 1214657917099862, guid: abdd95d0229d64588b03d2806d9cc19a, type: 3}
+    DetailCount: 45
+    DetailPrefabs:
+    - {fileID: 100000, guid: 7ca168569b7f1c5479b28f521d0a1a32, type: 3}
+    - {fileID: 100000, guid: 7aa6cb432038d7c48a82b9395843536a, type: 3}
+    BushCount: 225
+    BushPrefabs:
+    - {fileID: 7992715529498131577, guid: 0cc0db2b14252644da9f1f74ed0c8f90, type: 3}
+  - PlacementTexture: {fileID: 2800000, guid: 1d1ca9b1ff6a5ce4bbac09d301d51462, type: 3}
+    TreeCount: 45
+    TreePrefab:
+    - {fileID: 1364922359172550, guid: 7e3c80b421a0d465b80b8e51a763ea9c, type: 3}
+    - {fileID: 1743353957770956, guid: f41642586885949968180791f012ee81, type: 3}
+    DetailCount: 45
+    DetailPrefabs:
+    - {fileID: 100000, guid: 7ca168569b7f1c5479b28f521d0a1a32, type: 3}
+    - {fileID: 100000, guid: 7aa6cb432038d7c48a82b9395843536a, type: 3}
+    BushCount: 225
+    BushPrefabs:
+    - {fileID: 6786704563919835699, guid: ff0b0a3d7ae7a9e4f8505795785ad853, type: 3}
+  - PlacementTexture: {fileID: 2800000, guid: 088d1553cd3a5fc4ea7bb0a13cfa0584, type: 3}
+    TreeCount: 0
+    TreePrefab: []
+    DetailCount: 0
+    DetailPrefabs: []
+    BushCount: 0
+    BushPrefabs: []
