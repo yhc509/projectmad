@@ -120,6 +120,11 @@ namespace StarterAssets
         private GameObject _mainCamera;
         private CinemachineVirtualCamera _playerVirtualCamera;
 
+        public Rigidbody _rigidBody;
+        public LayerMask pushLayers;
+        public bool canPush;
+        [Range(0.5f, 5f)] public float strength = 1.1f;
+
         private const float _threshold = 0.01f;
 
         private bool _hasAnimator;
@@ -164,8 +169,7 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
-
-            // jump�� �� ���¿��� space�� ������ �����׷� �õ��ϴ°�
+                        
             _tryLedgeGrab = 
                 Input.GetKeyDown(KeyCode.Space) && 
                 _animator.GetBool(_animIDJump) && 
@@ -189,6 +193,31 @@ namespace StarterAssets
             _animIDFreeFall     = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed  = Animator.StringToHash("MotionSpeed");
             _animIDLedgeGrab    = Animator.StringToHash("LedgeGrab");
+        }
+
+        private void OnCollisionEnter(Collision hit)
+        {
+            if (canPush)
+            {
+                // https://docs.unity3d.com/ScriptReference/CharacterController.OnControllerColliderHit.html
+
+                // make sure we hit a non kinematic rigidbody
+                Rigidbody body = hit.collider.attachedRigidbody;
+                if (body == null || body.isKinematic) return;
+
+                // make sure we only push desired layer(s)
+                var bodyLayerMask = 1 << body.gameObject.layer;
+                if ((bodyLayerMask & pushLayers.value) == 0) return;
+
+                // We dont want to push objects below us
+                if (hit.relativeVelocity.y < -0.3f) return;
+
+                // Calculate push direction from move direction, horizontal motion only
+                Vector3 pushDir = new Vector3(hit.relativeVelocity.x, 0.0f, hit.relativeVelocity.z);
+
+                // Apply the push and take strength into account
+                body.AddForce(pushDir * strength, ForceMode.Impulse);
+            }
         }
 
         private void GroundedCheck()
