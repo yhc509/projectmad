@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 public class MovingObstacle : MonoBehaviour
@@ -13,7 +14,9 @@ public class MovingObstacle : MonoBehaviour
     public bool _isPong;
 
     public float _speed = 1f;
-    
+    public float _waitTime = 3f;
+
+    private float _time = 0f;
     
     void Update()
     {
@@ -28,6 +31,25 @@ public class MovingObstacle : MonoBehaviour
         
         _moveObjTrn.position = Vector3.MoveTowards(_moveObjTrn.position, targetPos, Time.deltaTime * _speed);
         if (Vector3.Distance(_moveObjTrn.position, targetPos) < 0.1f)
-            _isPong = !_isPong;
+        {
+            _time += Time.deltaTime;
+            if(_time >= _waitTime)
+            {
+                _isPong = !_isPong;
+                _time = 0f;
+            }
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player");
+            var player = other.gameObject.GetComponent<ThirdPersonController>();
+            player.Grounded = false;
+            player.SetVerticalVelocity(_speed);
+        }
+        
     }
 }
