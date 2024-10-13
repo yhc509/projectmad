@@ -78,6 +78,7 @@ namespace StarterAssets
         private float _cinemachineTargetPitch;
 
         // player
+        public GameObject _playerTop;
         private float _speed;
         private float _animationBlend;
         private float _targetRotation = 0.0f;
@@ -115,10 +116,12 @@ namespace StarterAssets
 
         private PlayerInput _playerInput;
         private Animator _animator;
-        private CharacterController _controller;
+        public CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
         private CinemachineVirtualCamera _playerVirtualCamera;
+
+        public Vector3 movigGroundVec = Vector3.zero;
 
         public Rigidbody _rigidBody;
         public LayerMask pushLayers;
@@ -195,6 +198,7 @@ namespace StarterAssets
             _animIDLedgeGrab    = Animator.StringToHash("LedgeGrab");
         }
 
+        // 바닥이랑 상관없
         private void OnCollisionEnter(Collision hit)
         {
             if (canPush)
@@ -225,6 +229,7 @@ namespace StarterAssets
             // set sphere position, with offset
             Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset,
                 transform.position.z);
+
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
                 QueryTriggerInteraction.Ignore);
 
@@ -393,9 +398,11 @@ namespace StarterAssets
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
+            Vector3 movingVector = movigGroundVec;
+
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime + movingVector);
 
             // update animator if using character
             if (_hasAnimator)
