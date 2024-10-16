@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Scenes/Stages/Stage_yhj/ui/uss.uss?fileID=7433441132597879392&amp;guid=e3c5f8fd708c2494f80383f5fb53aaaa&amp;type=3#uss" />
+    <ui:Label tabindex="-1" text="00:00:00" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TimeText" class="labelTest TopText" />
+</ui:UXML>

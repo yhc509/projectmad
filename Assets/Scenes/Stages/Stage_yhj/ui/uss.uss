@@ -1,0 +1,7 @@
+.TopText {
+    font-size: 48px;
+    color: rgb(255, 229, 0);
+    -unity-font-style: bold;
+    -unity-text-outline-width: 1px;
+    margin-left: 10px;
+}
