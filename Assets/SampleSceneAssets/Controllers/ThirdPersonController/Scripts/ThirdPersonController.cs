@@ -121,7 +121,7 @@ namespace StarterAssets
         private GameObject _mainCamera;
         private CinemachineVirtualCamera _playerVirtualCamera;
 
-        public Vector3 movigGroundVec = Vector3.zero;
+        public bool _autoLedgeGrab;
 
         public Rigidbody _rigidBody;
         public LayerMask pushLayers;
@@ -172,11 +172,7 @@ namespace StarterAssets
         private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
-                        
-            _tryLedgeGrab = 
-                Input.GetKeyDown(KeyCode.Space) && 
-                _animator.GetBool(_animIDJump) && 
-                Grounded == false;
+
 
             JumpAndGravity();
             GroundedCheck();
@@ -398,11 +394,9 @@ namespace StarterAssets
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
-            Vector3 movingVector = movigGroundVec;
-
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime + movingVector);
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimator)
@@ -414,10 +408,12 @@ namespace StarterAssets
 
         private void JumpAndGravity()
         {
-            if (_verticalVelocityForce > 0f)
+            _tryLedgeGrab = _autoLedgeGrab || (Input.GetKeyDown(KeyCode.Space) && _animator.GetBool(_animIDJump) && Grounded == false);
+
+            if (_verticalVelocityForce < 0f)
             {
                 _verticalVelocity = _verticalVelocityForce;
-                Grounded = false;
+                
                 _verticalVelocityForce = 0f;
             }
             
@@ -434,7 +430,7 @@ namespace StarterAssets
                 }
 
                 // stop our velocity dropping infinitely when grounded
-                if (_verticalVelocity < 0.0f)
+                if (_verticalVelocity < -10.0f)
                 {
                     _verticalVelocity = -2f;
                 }

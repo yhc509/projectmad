@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Halloween Pack-Cemetery Snap.meta
 guid: 0ecadfc66aa59474f88075d8dd114f2a
+========
+guid: b5bb67099440c4648a23986c919250a4
+>>>>>>>> eee4469a2d7f009e2ee581d8eb3cc02dfc1d2d21:Assets/Scripts/Editor.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
