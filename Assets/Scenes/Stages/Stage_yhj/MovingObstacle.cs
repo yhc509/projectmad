@@ -32,7 +32,7 @@ public class MovingObstacle : MonoBehaviour
         _lastPos = _moveObjTrn.position;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (_moveObjTrn == null || _startTrn == null || _endTrn == null) return;
 
@@ -55,7 +55,7 @@ public class MovingObstacle : MonoBehaviour
             if(_time >= _waitTime)
             {
                 _isPong = !_isPong;
-                _time = 0f;
+                _time = 0f; 
                 _speed = _originSpeed;
             }
         }
@@ -71,9 +71,9 @@ public class MovingObstacle : MonoBehaviour
     {
         if (_steppedPlayerTr == null) return;
 
-        Vector3 newPos = new Vector3(_steppedPlayerTr.position.x, _steppedPlayerTr.position.y + _offset, _steppedPlayerTr.position.z);
-        newPos += _moveVec * 1.1f;
-        //_steppedPlayerTr.GetComponent<ThirdPersonController>().SetVerticalVelocity(-_speed);
+        Vector3 newPos = new Vector3(_steppedPlayerTr.position.x, _moveObjTrn.position.y + _offset, _steppedPlayerTr.position.z);
         _steppedPlayerTr.position = newPos;
+        //_steppedPlayerTr.GetComponent<ThirdPersonController>().SetVerticalVelocity(-_speed);
+        //_steppedPlayerTr.GetComponent<CharacterController>().SimpleMove(_moveVec);
     }
 }
