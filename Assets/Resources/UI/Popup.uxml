@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/UI/uss.uss?fileID=7433441132597879392&amp;guid=e3c5f8fd708c2494f80383f5fb53aaaa&amp;type=3#uss" />
+    <ui:VisualElement class="bg" style="flex-grow: 1; position: absolute; left: auto;" />
+    <ui:VisualElement class="popup" style="flex-grow: 1; right: auto; height: 50%; width: auto; left: auto; margin-top: 6%; margin-right: 20%; margin-bottom: 30px; margin-left: 20%;">
+        <ui:Label tabindex="-1" text="TITLE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Title" style="font-size: 60px; -unity-text-align: middle-center; height: 20%;" />
+        <ui:Label tabindex="-1" text="CONTENT" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Content" style="height: 80%; font-size: 48px; -unity-text-align: middle-center; padding-bottom: 5%;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; -unity-text-align: middle-left; justify-content: center;">
+        <ui:Button text="OK" parse-escape-sequences="true" display-tooltip-when-elided="true" name="OkButton" class="button ok" style="min-width: 300px; color: rgb(51, 51, 51); background-color: rgb(237, 169, 5);" />
+        <ui:Button text="CANCEL" parse-escape-sequences="true" display-tooltip-when-elided="true" name="CancelButton" class="button cancel" style="min-width: 300px;" />
+    </ui:VisualElement>
+</ui:UXML>
