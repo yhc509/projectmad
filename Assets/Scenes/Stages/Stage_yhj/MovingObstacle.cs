@@ -22,9 +22,17 @@ public class MovingObstacle : MonoBehaviour
     public float _waitTime = 3f;
 
     private float _time = 0f;
+
+    Vector3 _lastPos = Vector3.zero;
+    Vector3 _moveVec = Vector3.zero;
     [SerializeField] float _offset;
 
-    void Update()
+    private void Start()
+    {
+        _lastPos = _moveObjTrn.position;
+    }
+
+    void FixedUpdate()
     {
         if (_moveObjTrn == null || _startTrn == null || _endTrn == null) return;
 
@@ -37,6 +45,9 @@ public class MovingObstacle : MonoBehaviour
         
         _moveObjTrn.position = Vector3.MoveTowards(_moveObjTrn.position, targetPos, Time.deltaTime * _speed);
 
+        _moveVec = _moveObjTrn.position - _lastPos;
+        _lastPos = _moveObjTrn.position;
+
         if (Vector3.Distance(_moveObjTrn.position, targetPos) < 0.1f)
         {
             _speed = 0.0f;
@@ -44,7 +55,7 @@ public class MovingObstacle : MonoBehaviour
             if(_time >= _waitTime)
             {
                 _isPong = !_isPong;
-                _time = 0f;
+                _time = 0f; 
                 _speed = _originSpeed;
             }
         }
@@ -62,5 +73,7 @@ public class MovingObstacle : MonoBehaviour
 
         Vector3 newPos = new Vector3(_steppedPlayerTr.position.x, _moveObjTrn.position.y + _offset, _steppedPlayerTr.position.z);
         _steppedPlayerTr.position = newPos;
+        //_steppedPlayerTr.GetComponent<ThirdPersonController>().SetVerticalVelocity(-_speed);
+        //_steppedPlayerTr.GetComponent<CharacterController>().SimpleMove(_moveVec);
     }
 }
