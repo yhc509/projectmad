@@ -72,7 +72,8 @@ public class MovingObstacle : MonoBehaviour
         if (_steppedPlayerTr == null) return;
 
         Vector3 newPos = new Vector3(_steppedPlayerTr.position.x, _moveObjTrn.position.y + _offset, _steppedPlayerTr.position.z);
-        _steppedPlayerTr.position = newPos;
+        _steppedPlayerTr.SetParent(_moveObjTrn);
+        //_steppedPlayerTr.position = newPos;
         //_steppedPlayerTr.GetComponent<ThirdPersonController>().SetVerticalVelocity(-_speed);
         //_steppedPlayerTr.GetComponent<CharacterController>().SimpleMove(_moveVec);
     }
