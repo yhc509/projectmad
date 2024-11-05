@@ -1051,14 +1051,14 @@ MonoBehaviour:
   LayersToIgnore: 0
   ForceLayer: 0
   LayerToSwitchTo: 0
-  UseDynamicNonConvexColliders: 1
+  UseDynamicNonConvexColliders: 0
   ColliderBakingMode: 1
   MaxMeshCollidersCreated: 6
   ColliderResolution: 300000
   velocityIterations: 10
   solverIterations: 10
-  useLowQualityConvexCollidersOnSelection: 1
-  UseLimitationZone: 1
+  useLowQualityConvexCollidersOnSelection: 0
+  UseLimitationZone: 0
   Constraints: 0
   JungleLogo: {fileID: 2800000, guid: 1e021604d3033604dbbdf0af3615fbe5, type: 3}
   GetStartedArrow: {fileID: 2800000, guid: 6f19a967e55eb7a4db62b3cd08e30764, type: 3}
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   SetKinematicWhenNotActive: 1
   UseSoftCollision: 1
   DisplayWarning: 1
-  useNormalFactor: 0
+  useNormalFactor: 1
   MaxNormalSpeedFactor: 0.7
   debugCollisionDirection: 0
   MaxPhysXIterationPerUpdate: 1
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   StaticObjectsLayer: 0
   AlignStrength: 1.12
   ExtraDragForRotationMode: 100
-  GravityStrength: {x: -1.4261799e-10, y: -9.800633, z: -0.0000011683267}
+  GravityStrength: {x: 0, y: -9.80624, z: -0.000001168995}
   LimitBodyVelocityInGravityMode: 0
   SetGravityInDirectionOfMouse: 0
   PausePositionReajustment: 1
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   CollisionMaxVelocity: 1
   MaxAngularVelocity: 10
   MaxDepenetrationVelocity: 10
-  UseBoundDependantValues: 0
+  UseBoundDependantValues: 1
   CollisionMinBoundFactor: 0.3
   CollisionMaxBoundFactor: 1
   BoundVolumeForMinSpeed: 0.001
