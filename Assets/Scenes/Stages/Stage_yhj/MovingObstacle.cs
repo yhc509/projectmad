@@ -12,7 +12,7 @@ public class MovingObstacle : MonoBehaviour
 
     public Transform _endTrn;
 
-    // setParent·Î y°ªÀÌ Á¦´ë·Î Á¶Á¤ÀÌ ¾ÈµÈ´Ù.
+    // setParentï¿½ï¿½ yï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÈ´ï¿½.
     public Transform _steppedPlayerTr;
 
     public bool _isPong;
@@ -32,7 +32,7 @@ public class MovingObstacle : MonoBehaviour
         _lastPos = _moveObjTrn.position;
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (_moveObjTrn == null || _startTrn == null || _endTrn == null) return;
 
