@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 0
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
@@ -2118,6 +2118,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  _playerTop: {fileID: 0}
   _rayHitMark: {fileID: 8493768531887663845, guid: 351e13ba5bb2cde418fb1f27700f5299, type: 3}
   _rayStartTransform: {fileID: 4652882250243998612}
   _playerOffset: {x: 0, y: 0, z: 0}
@@ -2125,6 +2126,8 @@ MonoBehaviour:
   _ledgeDetectionMask:
     serializedVersion: 2
     m_Bits: 1
+  _controller: {fileID: 0}
+  _autoLedgeGrab: 0
   _rigidBody: {fileID: 0}
   pushLayers:
     serializedVersion: 2
