@@ -4,6 +4,7 @@ using StarterAssets;
 using TMPro;
 using UnityEngine;
 
+[DefaultExecutionOrder(2)]
 public class MovingObstacle : MonoBehaviour
 {
     public Transform _moveObjTrn;

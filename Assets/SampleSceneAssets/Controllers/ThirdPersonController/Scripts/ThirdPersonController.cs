@@ -10,6 +10,7 @@ namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInput))]
+    [DefaultExecutionOrder(1)]
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
@@ -169,7 +170,17 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
         }
 
-        private void Update()
+        // private void Update()
+        // {
+        //     _hasAnimator = TryGetComponent(out _animator);
+        //
+        //
+        //     JumpAndGravity();
+        //     GroundedCheck();
+        //     Move();
+        // }
+
+        private void LateUpdate()
         {
             _hasAnimator = TryGetComponent(out _animator);
 
@@ -177,10 +188,6 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
-        }
-
-        private void LateUpdate()
-        {
             CameraRotation();
         }
 
@@ -389,14 +396,15 @@ namespace StarterAssets
 
                 // rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+                
+
+                Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+                // move the player
+                _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
             }
-
-
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-            // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimator)
