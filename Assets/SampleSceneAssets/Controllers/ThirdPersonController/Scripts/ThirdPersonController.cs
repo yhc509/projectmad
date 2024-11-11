@@ -10,7 +10,6 @@ namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(PlayerInput))]
-    [DefaultExecutionOrder(1)]
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
@@ -86,18 +85,18 @@ namespace StarterAssets
         private float _rotationVelocity;
         private float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
-        
+
         private float _verticalVelocityForce; // 외부 기믹에 의한 수직속도
 
         private bool _tryLedgeGrab = false;
         private bool _onLedgeGrab = false;
 
-        public GameObject _rayHitMark; 
+        public GameObject _rayHitMark;
         public Transform _rayStartTransform;
         Vector3 _ledgeMarker;
         Vector3 _rayStart;
         Vector3 _rayLedgePosition;
-        public Vector3 _playerOffset =new Vector3(0.0f, -2.4f, 0.0f);
+        public Vector3 _playerOffset = new Vector3(0.0f, -2.4f, 0.0f);
         public Quaternion _playerRotOffset = Quaternion.identity;
         public LayerMask _ledgeDetectionMask;
         RaycastHit _rayHitWall;
@@ -157,7 +156,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -170,35 +169,29 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
         }
 
-        // private void Update()
-        // {
-        //     _hasAnimator = TryGetComponent(out _animator);
-        //
-        //
-        //     JumpAndGravity();
-        //     GroundedCheck();
-        //     Move();
-        // }
-
-        private void LateUpdate()
+        private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
-
 
             JumpAndGravity();
             GroundedCheck();
             Move();
+        }
+
+        private void FixedUpdate()
+        {
             CameraRotation();
         }
 
+
         private void AssignAnimationIDs()
         {
-            _animIDSpeed        = Animator.StringToHash("Speed");
-            _animIDGrounded     = Animator.StringToHash("Grounded");
-            _animIDJump         = Animator.StringToHash("Jump");
-            _animIDFreeFall     = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed  = Animator.StringToHash("MotionSpeed");
-            _animIDLedgeGrab    = Animator.StringToHash("LedgeGrab");
+            _animIDSpeed = Animator.StringToHash("Speed");
+            _animIDGrounded = Animator.StringToHash("Grounded");
+            _animIDJump = Animator.StringToHash("Jump");
+            _animIDFreeFall = Animator.StringToHash("FreeFall");
+            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDLedgeGrab = Animator.StringToHash("LedgeGrab");
         }
 
         // 바닥이랑 상관없
@@ -254,7 +247,7 @@ namespace StarterAssets
         void LedgeRayCast()
         {
             if (_rayStartTransform == null) return;
-            
+
             if (Physics.Raycast(_rayStartTransform.position, transform.forward, out _rayHitWall, 1f, _ledgeDetectionMask))
             {
                 _rayStart = _rayHitWall.point + transform.forward * 0.03f;
@@ -293,7 +286,7 @@ namespace StarterAssets
             float backwardOffset = 0.4f;
 
             Vector3 hitPosition = _rayLedgePosition;//_rayFindLedge.point;
-            transform.position = hitPosition + _playerOffset - transform.forward*backwardOffset;
+            transform.position = hitPosition + _playerOffset - transform.forward * backwardOffset;
             transform.SetPositionAndRotation(transform.position, transform.rotation * _playerRotOffset);
 
         }
@@ -302,7 +295,7 @@ namespace StarterAssets
         {
             _animator.SetBool(_animIDLedgeGrab, false);
             _onLedgeGrab = false;
-            
+
             MoveSpeed = 2.0f;
             SprintSpeed = 5.335f;
             Gravity = -15.0f;
@@ -313,7 +306,7 @@ namespace StarterAssets
         private void OnDrawGizmos()
         {
             if (_rayStartTransform == null) return;
-            
+
             Vector3 forward = transform.TransformDirection(Vector3.forward);
             Debug.DrawRay(_rayStartTransform.position, forward, Color.green);
             //Vector3 down = transform.TransformDirection(Vector3.down);
@@ -344,7 +337,7 @@ namespace StarterAssets
 
         private void Move()
         {
-            if (_onLedgeGrab)              
+            if (_onLedgeGrab)
                 return;
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
@@ -396,15 +389,14 @@ namespace StarterAssets
 
                 // rotate to face input direction relative to camera position
                 transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-                
-
-                Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-                // move the player
-                _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
             }
+
+
+            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+            // move the player
+            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character
             if (_hasAnimator)
@@ -421,10 +413,10 @@ namespace StarterAssets
             if (_verticalVelocityForce < 0f)
             {
                 _verticalVelocity = _verticalVelocityForce;
-                
+
                 _verticalVelocityForce = 0f;
             }
-            
+
             if (Grounded)
             {
                 // reset the fall timeout timer
@@ -486,7 +478,7 @@ namespace StarterAssets
                 // if we are not grounded, do not jump
                 _input.jump = false;
 
-                // �����׷��ϴ� ���߿��� �����־����
+                //      ׷  ϴ     ߿         ־    
                 if (_onLedgeGrab)
                 {
                     _speed = 0.0f;

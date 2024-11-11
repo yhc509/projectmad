@@ -12,8 +12,9 @@ public class TranslateHelper : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("player is on mo, enter");
-
+            
             var player = other.GetComponent<ThirdPersonController>();
+            player._playerTop.transform.SetParent(movingObs._cylinder);
             movingObs._steppedPlayerTr = player.transform;
         }
     }
@@ -23,8 +24,9 @@ public class TranslateHelper : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("player is on mo. stay");
-        
+            
             var player = other.GetComponent<ThirdPersonController>();
+            player._playerTop.transform.SetParent(movingObs._cylinder);
             movingObs._steppedPlayerTr = player.transform;
         }
     }
@@ -33,9 +35,10 @@ public class TranslateHelper : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("player is on mo. stay");
-
+            Debug.Log("player is on mo. Exit");
+            
             var player = other.GetComponent<ThirdPersonController>();
+            player._playerTop.transform.SetParent(null);
             movingObs._steppedPlayerTr = null;
         }
     }

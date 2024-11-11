@@ -4,7 +4,6 @@ using StarterAssets;
 using TMPro;
 using UnityEngine;
 
-[DefaultExecutionOrder(2)]
 public class MovingObstacle : MonoBehaviour
 {
     public Transform _moveObjTrn;
@@ -15,6 +14,7 @@ public class MovingObstacle : MonoBehaviour
 
     // setParent�� y���� ����� ������ �ȵȴ�.
     public Transform _steppedPlayerTr;
+    public Transform _cylinder;
 
     public bool _isPong;
 
@@ -33,7 +33,7 @@ public class MovingObstacle : MonoBehaviour
         _lastPos = _moveObjTrn.position;
     }
 
-    void LateUpdate()
+    void FixedUpdate()
     {
         if (_moveObjTrn == null || _startTrn == null || _endTrn == null) return;
 
@@ -43,7 +43,7 @@ public class MovingObstacle : MonoBehaviour
             targetPos = _endTrn.position;
         else
             targetPos = _startTrn.position;
-        
+
         _moveObjTrn.position = Vector3.MoveTowards(_moveObjTrn.position, targetPos, Time.deltaTime * _speed);
 
         _moveVec = _moveObjTrn.position - _lastPos;
@@ -53,10 +53,10 @@ public class MovingObstacle : MonoBehaviour
         {
             _speed = 0.0f;
             _time += Time.deltaTime;
-            if(_time >= _waitTime)
+            if (_time >= _waitTime)
             {
                 _isPong = !_isPong;
-                _time = 0f; 
+                _time = 0f;
                 _speed = _originSpeed;
             }
         }
@@ -65,17 +65,22 @@ public class MovingObstacle : MonoBehaviour
             _speed = _originSpeed;
         }
 
-        AdjustSteppedPlayerTr();
+        //AdjustSteppedPlayerTr();
     }
 
     void AdjustSteppedPlayerTr()
     {
         if (_steppedPlayerTr == null) return;
 
-        Vector3 newPos = new Vector3(_steppedPlayerTr.position.x, _moveObjTrn.position.y + _offset, _steppedPlayerTr.position.z);
-        _steppedPlayerTr.SetParent(_moveObjTrn);
+        Vector3 newPos = new Vector3(_moveObjTrn.position.x, _moveObjTrn.position.y + _offset, _moveObjTrn.position.z);
         //_steppedPlayerTr.position = newPos;
+
+        //_steppedPlayerTr.transform.Translate(_moveVec);
+        //_steppedPlayerTr.SetParent(_moveObjTrn); 
         //_steppedPlayerTr.GetComponent<ThirdPersonController>().SetVerticalVelocity(-_speed);
-        //_steppedPlayerTr.GetComponent<CharacterController>().SimpleMove(_moveVec);
+        //_steppedPlayerTr.GetComponent<ThirdPersonController>().transform.position = newPos;
+        //if (_moveVec.sqrMagnitude > 0.0f)
+        //    _steppedPlayerTr.GetComponent<ThirdPersonController>()._controller.Move(_moveVec);
+
     }
 }
