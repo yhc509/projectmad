@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/EmptyScene.unity
     guid: 16921d834a96f7942a71fab363420a72
   - enabled: 1
-    path: Assets/Scenes/Stages/Stage_yhj/Stage_yhj_improved.unity
+    path: Assets/Scenes/Stages/Stage_yhj/Stage_yhj.unity
     guid: 0fac40f50b0a0d149a59fc0b8d8a334f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
