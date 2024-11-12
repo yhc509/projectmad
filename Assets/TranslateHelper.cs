@@ -15,6 +15,7 @@ public class TranslateHelper : MonoBehaviour
             
             var player = other.GetComponent<ThirdPersonController>();
             player._playerTop.transform.SetParent(movingObs._cylinder);
+            player.Grounded = true;
             movingObs._steppedPlayerTr = player.transform;
         }
     }
@@ -27,6 +28,7 @@ public class TranslateHelper : MonoBehaviour
             
             var player = other.GetComponent<ThirdPersonController>();
             player._playerTop.transform.SetParent(movingObs._cylinder);
+            player.Grounded = true;
             movingObs._steppedPlayerTr = player.transform;
         }
     }

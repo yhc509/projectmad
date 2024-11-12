@@ -209,6 +209,11 @@ namespace StarterAssets
 				{
 					_jumpTimeoutDelta -= Time.deltaTime;
 				}
+
+				if (_jumpTimeoutDelta <= 0.01f)
+				{
+					_input.jump = false;
+				}
 			}
 			else
 			{

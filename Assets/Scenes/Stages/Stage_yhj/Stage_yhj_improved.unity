@@ -6109,7 +6109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skyVolume: {fileID: 1398496723}
   mainLight: {fileID: 1623669956}
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 1294333634}
   minHeight: 0
   maxHeight: 1000
   cloudDisappearStartHeight: 1000
@@ -6914,11 +6914,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1166048306065925871, guid: eb2900c107f54b848af41fcdb3afeb0e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.79
+      value: 0.3199997
       objectReference: {fileID: 0}
     - target: {fileID: 1166048306065925871, guid: eb2900c107f54b848af41fcdb3afeb0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.62499976
+      value: 1.4749999
       objectReference: {fileID: 0}
     - target: {fileID: 1166048306065925871, guid: eb2900c107f54b848af41fcdb3afeb0e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6974,7 +6974,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3240035140227067601, guid: eb2900c107f54b848af41fcdb3afeb0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4750001
+      value: 1.4749999
       objectReference: {fileID: 0}
     - target: {fileID: 3240035140227067601, guid: eb2900c107f54b848af41fcdb3afeb0e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -10889,6 +10889,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011095560932, guid: 3d609541b623cc24a85fcc89ee9fa9e6, type: 3}
   m_PrefabInstance: {fileID: 1284228326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1294333634 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4137252500556910297, guid: eb2900c107f54b848af41fcdb3afeb0e, type: 3}
+  m_PrefabInstance: {fileID: 879044974}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1303483439
 GameObject:
