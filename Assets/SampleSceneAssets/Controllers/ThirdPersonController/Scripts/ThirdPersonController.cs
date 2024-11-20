@@ -132,6 +132,11 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
+        // backup
+        private float backup_MoveSpeed;
+        private float backup_SprintSpeed;
+        private float backup_Gravity;
+        
         private bool IsCurrentDeviceMouse
         {
             get
@@ -167,6 +172,10 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            
+            backup_MoveSpeed = MoveSpeed;
+            backup_SprintSpeed = SprintSpeed;
+            backup_Gravity = Gravity;
         }
 
         private void Update()
@@ -296,9 +305,9 @@ namespace StarterAssets
             _animator.SetBool(_animIDLedgeGrab, false);
             _onLedgeGrab = false;
 
-            MoveSpeed = 2.0f;
-            SprintSpeed = 5.335f;
-            Gravity = -15.0f;
+            MoveSpeed = backup_MoveSpeed;
+            SprintSpeed = backup_SprintSpeed;
+            Gravity = backup_Gravity;
             Vector3 upOffset = new Vector3(0.0f, 0.05f, 0.0f);
             transform.position = _rayLedgePosition + upOffset;
         }
@@ -412,10 +421,9 @@ namespace StarterAssets
         {
             _tryLedgeGrab = _autoLedgeGrab || (Input.GetKeyDown(KeyCode.Space) && _animator.GetBool(_animIDJump) && Grounded == false);
 
-            if (_verticalVelocityForce < 0f)
+            if (_verticalVelocityForce > 0f)
             {
                 _verticalVelocity = _verticalVelocityForce;
-
                 _verticalVelocityForce = 0f;
             }
 
